@@ -1,2 +1,4 @@
-# dynamic_metadata
-dynamic metadata support from MagicEden
+# Dynamic Metadata 
+
+## Core Features
+- Dynamic Metadata Standards
