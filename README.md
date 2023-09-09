@@ -1,8 +1,12 @@
 # Dynamic Metadata Standard
 
-Dynamic metadata, such as utilities, plays a crucial role in the current NFT ecosystem. We now offers support for dynamic metadata, enriching the information provided. We also enable you to add customized "attributes" metadata to each of your assets.
+Dynamic metadata has emerged as a transformative tool in the digital art space. It empowers creators to integrate real-time off-chain data, thereby enriching the on-chain metadata of their creations. What's even more compelling is its full compatibility with the established metadata standards on ETH, SOL, and BTC platforms.
 
-To accurately display dynamic metadata for each NFT, your API needs to return the information based on the digital asset's `asset_id`.
+In the rapidly evolving NFT landscape, features like dynamic metadata are becoming indispensable. We're excited to offer robust support for this, enhancing both the depth and richness of the information available to users. This not only elevates the value of the NFT but also provides a more immersive experience.
+
+To ensure a seamless integration, creators can also append custom "attributes" metadata to their individual assets. For the dynamic metadata to be accurately displayed for each NFT, it's essential that your API retrieves the relevant information using the digital asset's `asset_id`.
+
+Here's a spec of the DynamicMetadata standard we proposed. It's compatible with the existing onchain metadata JSON schema.
 
 ```typescript
 interface Attribute {
@@ -24,16 +28,16 @@ interface DynamicMetadata {
 
 | Property         | Type                          | Description                                                                                                                                                                          |
 | :--------------- | :---------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| asset_id         | string (required)             | Indicates the asset_id associated with the metadata. <ul><li>For SOL: `${mintAddress}`,</li> <li>For ETH: `${smart_contract}/${token_id}`,</li> <li>For BTC: `${inscription_id}`</li> |
-| attributes       | Array of Attribute (required) | Indicates the dynamic attributes for the metadata                                                                                                                                    |
-| name             | string (optional)             | Indicates the value you'd like to show on each NFT                                                                                                                                   |
-| description      | string (optional)             | Provides rich information for users to understand the attributes                                                                                                                     |
+| name             | string (required)             | `name` indicates the value you'd like to show on each NFT                                                                                                                                   |
+| asset_id         | string (optional)             | `asset_id` echos back the requested `:asset_id` from the URL path. It indicates the asset_id associated with the metadata. <ul><li>For SOL: `${mintAddress}`,</li> <li>For ETH: `${smart_contract}/${token_id}`,</li> <li>For BTC: `${inscription_id}`</li> |
+| attributes       | Attribute[] (optional)        | The dynamic attributes for the metadata.                                                                                                                                   |
+| description      | string (optional)             | Rich information for users to understand the attributes                                                                                                                     |
 | image            | string (optional)             | URL for custom attribute icons. Recommended size: 20x20 pixels in SVG or PNG format                                                                                                  |
-| expiration_epoch | number (optional)             | Indicates the expiration date for your dynamic attributes (Unix timestamp in seconds)                                                                                                |
+| expiration_epoch | number (optional)             | Expiration date for your dynamic attributes (Unix timestamp in seconds)                                                                                                |
 
 ## Server Implementation
 
-Highly recommend the server implement the REST api that can respond to
+Highly recommend the server implement the REST api that can respond to the following curl. 
 
 ```
 curl https://HOST:PORT/dynamic-metadata/:asset_id
@@ -142,16 +146,23 @@ if __name__ == '__main__':
 
 ## Detailed Walkthrough with Example
 
-- asset_id
+- name
 
   - Type: string; required.
+  - Description: Represents the value you'd like us to display for each NFT. For customization, we currently ONLY support the string type.
+
+    <img src="https://bafkreidzb67l2csqvu2pglbft4kvhwo7owg64m25w5xbtbjkd263cokdnm.ipfs.nftstorage.link/" width="400" alt="How name will be rendered">
+
+- asset_id
+
+  - Type: string; optional.
   - Description: Indicates the asset_id associated with the metadata.
     - For SOL: `${mintAddress}`
     - For ETH: `${smart_contract}/${token_id}`
     - For BTC: `${inscription_id}`
 
 - attributes
-  - Type: Attribute[]; required.
+  - Type: Attribute[]; optional.
   - Description: This section is crucial in defining the appearance of your dynamic metadata. For example:
 
 ```
@@ -166,13 +177,6 @@ if __name__ == '__main__':
   }
 ]
 ```
-
-- name
-
-  - Type: string; optional.
-  - Description: Represents the value you'd like us to display for each NFT. For customization, we currently ONLY support the string type.
-
-    <img src="https://bafkreidzb67l2csqvu2pglbft4kvhwo7owg64m25w5xbtbjkd263cokdnm.ipfs.nftstorage.link/" width="400" alt="How name will be rendered">
 
 - description
 
