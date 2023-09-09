@@ -20,7 +20,7 @@ interface DynamicMetadata {
   asset_id?: string;         // optional echo back the requested asset_id
   description?: string;      // optional description field
   image?: string;            // optional url to the image.
-  expiration_epoch?: number; // optional expeiration epoch timeu in seconds
+  expiration_epoch?: number; // optional expiration epoch timestamp unit in seconds
 }
 ```
 
