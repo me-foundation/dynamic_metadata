@@ -171,18 +171,21 @@ if __name__ == '__main__':
 
   - Type: string; optional.
   - Description: Represents the value you'd like us to display for each NFT. For customization, we currently ONLY support the string type.
+
     <img src="https://bafkreidzb67l2csqvu2pglbft4kvhwo7owg64m25w5xbtbjkd263cokdnm.ipfs.nftstorage.link/" width="400" alt="How name will be rendered">
 
 - description
 
   - Type: string; optional.
   - Description: Used to provide an additional description for the name. Auto-generated format if left null: {trait_type} is ${value} from the attributes array.
+
     <img src="https://bafybeieeeu46xfwd6ttsxrftxm5rw7fgg6caqqucq36rii7naem74w24pm.ipfs.nftstorage.link/" width="400" alt="How description will be rendered">
 
 - image
 
   - Type: string; optional.
   - Description: Adds custom icons for your metadata. We recommend icons of size 20x20 pixels in SVG or PNG format.
+
     <img src="https://bafkreie4f53go5oqkd33cwrfccyjitjxp2osw6e5m6dikhqlqptrglg6ye.ipfs.nftstorage.link/" width="400" alt="How image will be rendered">
 
 - expiration_epoch
